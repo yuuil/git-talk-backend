@@ -1,0 +1,26 @@
+{
+  "name": "git-talk-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon 'src/server.ts' --exec 'ts-node' src/server.ts -e ts,graphql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "graphql-tools": "^7.0.1",
+    "graphql-yoga": "^1.18.3",
+    "path": "^0.12.7",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^14.14.6",
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5"
+  }
+}
