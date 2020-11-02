@@ -3,3 +3,43 @@ type User {
   name: String
   createdAt: String!
 }
+
+type Message {
+  id: ID!
+  chatKey: String!
+  plainText: String!
+  createdAt: String!
+}
+
+type Block {
+  id: ID!
+  type: String!
+  value: String!
+}
+
+type Action {
+  id: ID!
+  key: String!
+  text: String!
+  createdAt: String!
+}
+
+type Button {
+  id: ID!
+  title: String!
+  theme: String
+  url: String!
+  createdAt: String!
+}
+
+type File {
+  id: ID!;
+  type: String!
+  name: String!
+  size: Int!
+  animated: Boolean!
+  contentType: String!
+  width: Int
+  height: Int
+  createdAt: String!
+}
