@@ -1,8 +1,11 @@
 import "reflect-metadata";
 import path from "path";
+import dotenv from "dotenv";
 import { GraphQLServer } from "graphql-yoga";
 import { makeExecutableSchema } from "graphql-tools";
 import { buildTypeDefsAndResolvers } from "type-graphql";
+
+dotenv.config();
 
 const PORT = process.env.PORT || 4000;
 
