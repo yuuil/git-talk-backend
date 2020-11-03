@@ -1,13 +1,18 @@
 import { Field, ID, ObjectType } from "type-graphql";
+import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @ObjectType()
-export class User {
+@Entity()
+export class User extends BaseEntity {
   @Field(() => ID)
-  id: string;
+  @PrimaryGeneratedColumn('uuid')
+  readonly id: string;
 
   @Field()
+  @Column('text')
   name: string;
 
   @Field()
+  @CreateDateColumn({type:'datetime'})
   createdAt: Date;
 }
