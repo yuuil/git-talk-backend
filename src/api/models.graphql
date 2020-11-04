@@ -1,14 +1,17 @@
 type User {
   id: ID!
-  name: String
+  userId: String!
+  password: String!
+  name: String!
   avatarUrl: String
+  userChats: [Chat!]
   createdAt: String!
 }
 
 type Chat {
   id: ID!
-  userId: String!
   state: String!
+  stateKey: String!
   lastMessage: Message!
   askedAt: String
   closedAt: String
@@ -19,23 +22,28 @@ type Message {
   id: ID!
   chatId: String!
   chatKey: String!
+  userId: String!
   plainText: String!
   actions: [Action!]
   blocks: [Block!]
   buttons: [Button!]
   files: [File!]
+  submit: Submit
   createdAt: String!
 }
 
 type Block {
   id: ID!
+  blockId: String!
   type: String!
   value: String!
+  createdAt: String!
 }
 
 type Submit {
   id: String!
   key: String!
+  createdAt: String!
 }
 
 type Action {

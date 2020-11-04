@@ -3,9 +3,16 @@
     "target": "es5",
     "sourceMap": true,
     "outDir": "dist",
-    "lib": ["ESNext"],
+    "lib": ["esnext"],
+    "module": "commonjs",
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
-  }
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "@entity/*": ["src/entity/*"],
+      "@api/*": ["src/api/*"]
+    }
+  },
+  "exclude": ["dist", "node_modules"]
 }
