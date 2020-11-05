@@ -1,6 +1,14 @@
-import { Field, ID } from "type-graphql";
-import { BaseEntity, Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Field, ID, ObjectType } from "type-graphql";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
+@ObjectType()
+@Entity()
 export class File extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
@@ -27,11 +35,11 @@ export class File extends BaseEntity {
   contentType: string;
 
   @Field()
-  @Column("int", {nullable: true})
+  @Column("int", { nullable: true })
   width?: number;
 
   @Field()
-  @Column("int", {nullable: true})
+  @Column("int", { nullable: true })
   height?: number;
 
   @Field()

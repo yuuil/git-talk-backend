@@ -1,10 +1,18 @@
 import { Message } from "@entity/Message";
-import { Field, ID } from "type-graphql";
-import { BaseEntity, Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Field, ID, ObjectType } from "type-graphql";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
+@ObjectType()
+@Entity()
 export class Chat extends BaseEntity {
   @Field(() => ID)
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
   @Field()
@@ -20,14 +28,14 @@ export class Chat extends BaseEntity {
   lastMessage: Message;
 
   @Field()
-  @Column("timestamp with local time zone", {nullable: true})
+  @Column("timestamp with local time zone", { nullable: true })
   askedAt?: Date;
 
   @Field()
-  @Column("timestamp with local time zone", {nullable: true})
+  @Column("timestamp with local time zone", { nullable: true })
   closedAt?: Date;
 
   @Field()
-  @CreateDateColumn({type: "timestamp with local time zone"})
+  @CreateDateColumn({ type: "timestamp with local time zone" })
   createdAt: Date;
 }

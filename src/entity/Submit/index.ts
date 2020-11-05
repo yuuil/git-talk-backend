@@ -1,6 +1,14 @@
-import { Field, ID } from "type-graphql";
-import { BaseEntity, Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Field, ID, ObjectType } from "type-graphql";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
+@ObjectType()
+@Entity()
 export class Submit extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")

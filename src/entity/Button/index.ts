@@ -1,6 +1,14 @@
-import { Field, ID } from "type-graphql";
-import { BaseEntity, Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Field, ID, ObjectType } from "type-graphql";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
+@ObjectType()
+@Entity()
 export class Button extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
@@ -11,7 +19,7 @@ export class Button extends BaseEntity {
   title: string;
 
   @Field()
-  @Column("text", {nullable: true})
+  @Column("text", { nullable: true })
   theme?: string;
 
   @Field()

@@ -3,9 +3,17 @@ import { Block } from "@entity/Block";
 import { Button } from "@entity/Button";
 import { File } from "@entity/File";
 import { Submit } from "@entity/Submit";
-import { Field, ID } from "type-graphql";
-import { BaseEntity, Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Field, ID, ObjectType } from "type-graphql";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
+@ObjectType()
+@Entity()
 export class Message extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
