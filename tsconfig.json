@@ -10,8 +10,9 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
-      "@entity/*": ["src/entity/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@common/*": ["src/common/*"],
+      "@entity/*": ["src/entity/*"]
     }
   },
   "exclude": ["dist", "node_modules"]

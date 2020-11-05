@@ -1,10 +1,11 @@
 import { Chat } from "@entity/Chat";
-import { Field, ID, ObjectType } from "type-graphql";
+import { Field, ID, ObjectType, Root } from "type-graphql";
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -28,14 +29,16 @@ export class User extends BaseEntity {
   name: string;
 
   @Field()
-  @Column("text")
-  avatarUrl: string;
+  @Column("text", { nullable: true })
+  avatarUrl?: string;
+
+  @Field(() => [Chat], { nullable: true })
+  @OneToMany(() => Chat, (chat) => chat.user, {lazy: true})
+  async userChats(@Root() user: User): Promise<Chat[] | null> {
+    return await Chat.find(user);
+  };
 
   @Field()
-  @Column("json")
-  userChats: Chat[];
-
-  @Field()
-  @CreateDateColumn({ type: "timestamp with local time zone" })
+  @CreateDateColumn({ type: "timestamp with time zone" })
   createdAt: Date;
 }

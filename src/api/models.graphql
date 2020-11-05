@@ -13,6 +13,7 @@ type Chat {
   state: String!
   stateKey: String!
   lastMessage: Message!
+  user: User!
   askedAt: String
   closedAt: String
   createdAt: String!

@@ -35,27 +35,27 @@ export class Message extends BaseEntity {
   @Column("text")
   plainText: string;
 
-  @Field()
-  @Column("json")
-  actions: Action[];
+  // @Field()
+  // @Column("json")
+  // actions: Action[];
+
+  // @Field()
+  // @Column("json")
+  // blocks: Block[];
+
+  // @Field()
+  // @Column("json")
+  // buttons: Button[];
+
+  // @Field()
+  // @Column("json")
+  // files: File[];
+
+  // @Field()
+  // @Column("json")
+  // submit: Submit;
 
   @Field()
-  @Column("json")
-  blocks: Block[];
-
-  @Field()
-  @Column("json")
-  buttons: Button[];
-
-  @Field()
-  @Column("json")
-  files: File[];
-
-  @Field()
-  @Column("json")
-  submit: Submit;
-
-  @Field()
-  @CreateDateColumn({ type: "timestamp with local time zone" })
+  @CreateDateColumn({ type: "timestamp with time zone" })
   createdAt: Date;
 }

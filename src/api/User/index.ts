@@ -23,14 +23,14 @@ export class UserResolver {
     @Arg("userId") userId: string,
     @Arg("password") password: string,
     @Arg("name") name: string,
-    @Arg("avatarUrl") avatarUrl?: string
+    @Arg("avatarUrl", { nullable: true }) avatarUrl?: string
   ): Promise<boolean> {
     try {
       await User.insert({
         userId,
         password,
         name,
-        avatarUrl
+        avatarUrl,
       });
       return true;
     } catch (err) {

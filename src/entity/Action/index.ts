@@ -23,6 +23,6 @@ export class Action extends BaseEntity {
   text: string;
 
   @Field()
-  @CreateDateColumn({ type: "timestamp with local time zone" })
+  @CreateDateColumn({ type: "timestamp with time zone" })
   createdAt: Date;
 }
