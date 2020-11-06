@@ -16,10 +16,6 @@ export class Block extends BaseEntity {
 
   @Field()
   @Column("text")
-  blockId: string;
-
-  @Field()
-  @Column("text")
   type: string;
 
   @Field()

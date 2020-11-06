@@ -1,9 +1,11 @@
 import { Field, ID, ObjectType } from "type-graphql";
+import { Message } from "../Message/index";
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -16,6 +18,10 @@ export class Button extends BaseEntity {
 
   @Field()
   @Column("text")
+  key: string;
+
+  @Field()
+  @Column("text")
   title: string;
 
   @Field()
@@ -25,6 +31,10 @@ export class Button extends BaseEntity {
   @Field()
   @Column("text")
   url: string;
+
+  @Field()
+  @ManyToMany(() => Message, (message) => message.actions)
+  messages: Message[];
 
   @Field()
   @CreateDateColumn({ type: "timestamp with time zone" })

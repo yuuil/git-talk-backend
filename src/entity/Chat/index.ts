@@ -30,12 +30,8 @@ export class Chat extends BaseEntity {
 
   @Field()
   @OneToOne(() => Message, (message) => message.id, { lazy: true })
-  async lastMessage(@Root() chat: Chat): Promise<Message[] | null> {
-    return await Message.find({
-      where: { chatId: chat.id },
-      order: { createdAt: "DESC" },
-      take: 1,
-    });
+  async lastMessage(@Root() chat: Chat): Promise<Message | null> {
+    return await Message.findOne(chat, { order: { createdAt: "DESC" } });
   }
 
   @Field(() => User)
