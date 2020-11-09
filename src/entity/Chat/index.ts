@@ -28,15 +28,15 @@ export class Chat extends BaseEntity {
     return chat.state + chat.id;
   }
 
-  @Field()
+  @Field(() => Message)
   @OneToOne(() => Message, (message) => message.id, { lazy: true })
-  async lastMessage(@Root() chat: Chat): Promise<Message | null> {
+  async lastMessage(@Root() chat: Chat): Promise<Message> {
     return await Message.findOne(chat, { order: { createdAt: "DESC" } });
   }
 
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.userChats, { lazy: true })
-  async user(@Root() chat: Chat): Promise<User | null> {
+  async user(@Root() chat: Chat): Promise<User> {
     return await User.findOne(chat);
   }
 

@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -13,6 +14,10 @@ export class Block extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
+
+  @Field()
+  @PrimaryGeneratedColumn('increment')
+  key: string;
 
   @Field()
   @Column("text")

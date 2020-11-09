@@ -34,7 +34,7 @@ export class User extends BaseEntity {
 
   @Field(() => [Chat], { nullable: true })
   @OneToMany(() => Chat, (chat) => chat.user, {lazy: true})
-  async userChats(@Root() user: User): Promise<Chat[] | null> {
+  async userChats(@Root() user: User): Promise<Chat[]> {
     return await Chat.find(user);
   };
 
