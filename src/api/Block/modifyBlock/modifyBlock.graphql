@@ -1,0 +1,7 @@
+type Mutation {
+  modifyBlock(
+    id: String!,
+    type: String,
+    value: String
+  ): Boolean!
+}

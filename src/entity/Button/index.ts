@@ -27,8 +27,8 @@ export class Button extends BaseEntity {
   theme?: string;
 
   @Field()
-  @Column("text")
-  url: string;
+  @Column("text", {nullable: true})
+  url?: string;
 
   @Field()
   @CreateDateColumn({ type: "timestamp with time zone" })
