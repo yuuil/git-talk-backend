@@ -1,0 +1,11 @@
+type Mutation {
+  createFile(
+    type: String!,
+    name: String!,
+    size: Int!,
+    animated: Boolean!,
+    contentType: String!,
+    width: Int,
+    height: Int
+  ); Boolean!
+}

@@ -9,6 +9,7 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
 @ObjectType()
@@ -22,10 +23,9 @@ export class Chat extends BaseEntity {
   @Column("text", { default: "open" })
   state: string;
 
-  @Field()
-  @Column("text")
+  @Field({ nullable: true })
   stateKey(@Root() chat: Chat): string {
-    return chat.state + chat.id;
+    return chat.state + "_" + chat.id.replace(/-/g, "");
   }
 
   @Field(() => Message)
@@ -41,7 +41,7 @@ export class Chat extends BaseEntity {
   }
 
   @Field()
-  @Column("timestamp with time zone", { nullable: true })
+  @UpdateDateColumn({type: "timestamp with time zone"})
   askedAt?: Date;
 
   @Field()

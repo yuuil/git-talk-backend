@@ -19,19 +19,16 @@ export class ChatResolver {
     return await Chat.find();
   }
 
-  @Mutation(() => Boolean)
-  async createChat(@Arg("personId") personId: string): Promise<boolean> {
-    const user: User = await User.create({
-      id: personId,
-    });
+  @Mutation(() => String)
+  async createChat(@Arg("personId") personId: string): Promise<string> {
+    const user: User = await User.findOne({ userId: personId });
     try {
-      await Chat.insert({
+      return await Chat.insert({
         user,
-      });
-      return true;
+      }).then((res) => res.identifiers[0].id);
     } catch (err) {
       console.warn(err);
-      return false;
+      return null;
     }
   }
 }
