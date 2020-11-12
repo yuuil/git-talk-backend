@@ -1,4 +1,4 @@
 type Query {
-  message: Message
-  messages: [Message]
+  message(id: String!): Message
+  messages(userId: String!, page: Int, per: Int): [Message]
 }

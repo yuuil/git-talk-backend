@@ -1,3 +1,3 @@
 type Query {
-  block: Block
+  block(key: String!): Block
 }

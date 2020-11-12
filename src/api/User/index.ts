@@ -38,4 +38,15 @@ export class UserResolver {
       return false;
     }
   }
+
+  @Mutation(() => Boolean)
+  async deleteAccount(@Arg("userId") userId: string): Promise<boolean> {
+    try {
+      await User.delete({ userId });
+      return true;
+    } catch (err) {
+      console.warn(err);
+      return false;
+    }
+  }
 }

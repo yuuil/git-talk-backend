@@ -1,0 +1,3 @@
+type Mutation {
+  createSubmit(messageId: String!, key: String!): Boolean!
+}
