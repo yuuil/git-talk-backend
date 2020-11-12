@@ -5,3 +5,4 @@ package-lock.json
 dist
 .env*
 *.log
+yarn.lock
