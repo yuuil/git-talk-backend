@@ -16,6 +16,10 @@ export class Submit extends BaseEntity {
 
   @Field()
   @Column("text")
+  messageId: string;
+
+  @Field()
+  @Column("text")
   key: string;
 
   @Field()

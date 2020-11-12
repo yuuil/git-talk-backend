@@ -1,5 +1,6 @@
-import { Arg, Query, Resolver } from "type-graphql";
+import { Arg, Args, Mutation, Query, Resolver } from "type-graphql";
 import { Message } from "@entity/Message/index";
+import { CreateMessageArgs } from '@args/Message';
 
 @Resolver()
 export class MessageResolver {
@@ -33,6 +34,38 @@ export class MessageResolver {
     } catch (err) {
       console.warn(err);
       return null;
+    }
+  }
+
+  @Mutation(() => Boolean)
+  async createMessage(
+    @Args()
+    {
+      chatId,
+      chatKey,
+      userId,
+      plainText,
+      actions,
+      blocks,
+      files,
+      submit,
+    }: CreateMessageArgs
+  ): Promise<boolean> {
+    try {
+      await Message.insert({
+        chatId,
+        chatKey,
+        userId,
+        plainText,
+        actions,
+        blocks,
+        files,
+        submit,
+      });
+      return true;
+    } catch (err) {
+      console.warn(err);
+      return false;
     }
   }
 }

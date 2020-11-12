@@ -1,0 +1,13 @@
+type Mutation {
+  createMessage(
+    chatId: String!,
+    chatKey: String!,
+    userId: String!,
+    plainText: String!,
+    actions: [Action!],
+    blocks: [Block!],
+    buttons: [Button!],
+    files: [File!],
+    submit: Submit
+  ): Boolean!
+}
