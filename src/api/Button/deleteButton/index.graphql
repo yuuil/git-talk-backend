@@ -1,0 +1,5 @@
+type Mutation {
+  deleteButton(
+    id: String!
+  ): Boolean!
+}

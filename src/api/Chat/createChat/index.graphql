@@ -1,5 +1,5 @@
 type Mutation {
   createChat(
     personId: String!
-  )
+  ): Chat!
 }

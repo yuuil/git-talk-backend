@@ -1,0 +1,6 @@
+type Mutation {
+  createButton(
+    text: String!,
+    theme: String,
+    url: String
+  ): Boolean!

@@ -1,0 +1,8 @@
+type Mutation {
+  modifyButton(
+    id: String!,
+    text: String,
+    theme: String,
+    url: String
+  ): Boolean!
+}

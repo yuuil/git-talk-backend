@@ -1,0 +1,6 @@
+type Mutation {
+  createBlock(
+    type: String!,
+    value: String!
+  ): Boolean!
+}

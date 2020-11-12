@@ -8,6 +8,9 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -34,25 +37,24 @@ export class Message extends BaseEntity {
   @Column("text")
   plainText: string;
 
-  // @Field()
-  // @Column("json")
-  // actions: Action[];
+  @Field(() => [Button])
+  @ManyToMany(() => Button)
+  @JoinTable()
+  actions: Button[];
 
-  // @Field()
-  // @Column("json")
-  // blocks: Block[];
+  @Field(() => [Block])
+  @ManyToMany(() => Block)
+  @JoinTable()
+  blocks: Block[];
 
-  // @Field()
-  // @Column("json")
-  // buttons: Button[];
+  @Field(() => [File])
+  @ManyToMany(() => File)
+  @JoinTable()
+  files: File[];
 
-  // @Field()
-  // @Column("json")
-  // files: File[];
-
-  // @Field()
-  // @Column("json")
-  // submit: Submit;
+  @Field()
+  @OneToOne(() => Submit, submit => submit.id)
+  submit: Submit;
 
   @Field()
   @CreateDateColumn({ type: "timestamp with time zone" })

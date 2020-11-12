@@ -15,6 +15,10 @@ export class Block extends BaseEntity {
   readonly id: string;
 
   @Field()
+  @PrimaryGeneratedColumn('increment')
+  key: string;
+
+  @Field()
   @Column("text")
   type: string;
 

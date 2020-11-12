@@ -9,6 +9,7 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
 @ObjectType()
@@ -22,26 +23,25 @@ export class Chat extends BaseEntity {
   @Column("text", { default: "open" })
   state: string;
 
-  @Field()
-  @Column("text")
+  @Field({ nullable: true })
   stateKey(@Root() chat: Chat): string {
-    return chat.state + chat.id;
+    return chat.state + "_" + chat.id.replace(/-/g, "");
   }
 
-  @Field()
+  @Field(() => Message)
   @OneToOne(() => Message, (message) => message.id, { lazy: true })
-  async lastMessage(@Root() chat: Chat): Promise<Message | null> {
+  async lastMessage(@Root() chat: Chat): Promise<Message> {
     return await Message.findOne(chat, { order: { createdAt: "DESC" } });
   }
 
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.userChats, { lazy: true })
-  async user(@Root() chat: Chat): Promise<User | null> {
+  async user(@Root() chat: Chat): Promise<User> {
     return await User.findOne(chat);
   }
 
   @Field()
-  @Column("timestamp with time zone", { nullable: true })
+  @UpdateDateColumn({type: "timestamp with time zone"})
   askedAt?: Date;
 
   @Field()
