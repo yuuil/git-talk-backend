@@ -1,6 +1,9 @@
-import { Arg, Args, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { Message } from "@entity/Message/index";
-import { CreateMessageArgs } from '@args/Message';
+import { Button } from "@entity/Button";
+import { Block } from "@entity/Block";
+import { File } from "@entity/File";
+import { Submit } from "@entity/Submit";
 
 @Resolver()
 export class MessageResolver {
@@ -39,17 +42,14 @@ export class MessageResolver {
 
   @Mutation(() => Boolean)
   async createMessage(
-    @Args()
-    {
-      chatId,
-      chatKey,
-      userId,
-      plainText,
-      actions,
-      blocks,
-      files,
-      submit,
-    }: CreateMessageArgs
+    @Arg("chatId") chatId: string,
+    @Arg("chatKey") chatKey: string,
+    @Arg("userId") userId: string,
+    @Arg("plainText") plainText: string,
+    @Arg("actions", { nullable: true }) actions: Button[],
+    @Arg("blocks", { nullable: true }) blocks: Block[],
+    @Arg("files", { nullable: true }) files: File[],
+    @Arg("submit", { nullable: true }) submit: Submit
   ): Promise<boolean> {
     try {
       await Message.insert({

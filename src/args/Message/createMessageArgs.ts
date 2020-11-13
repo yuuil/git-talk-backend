@@ -1,8 +1,8 @@
 import { Block } from "@entity/Block";
+import { Button } from '@entity/Button';
 import { File } from "@entity/File";
+import { Submit } from '@entity/Submit';
 import { ArgsType, Field } from "type-graphql";
-import { Button } from '../../entity/Button/index';
-import { Submit } from '../../entity/Submit/index';
 
 @ArgsType()
 export class CreateMessageArgs {

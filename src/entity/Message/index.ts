@@ -37,23 +37,23 @@ export class Message extends BaseEntity {
   @Column("text")
   plainText: string;
 
-  @Field(() => [Button])
+  @Field(() => [Button], { nullable: true })
   @ManyToMany(() => Button)
   @JoinTable()
   actions: Button[];
 
-  @Field(() => [Block])
+  @Field(() => [Block], { nullable: true })
   @ManyToMany(() => Block)
   @JoinTable()
   blocks: Block[];
 
-  @Field(() => [File])
+  @Field(() => [File], { nullable: true })
   @ManyToMany(() => File)
   @JoinTable()
   files: File[];
 
-  @Field()
-  @OneToOne(() => Submit, submit => submit.id)
+  @Field(() => Submit)
+  @OneToOne(() => Submit, (submit) => submit.id)
   submit: Submit;
 
   @Field()

@@ -4,8 +4,7 @@ type Mutation {
     chatKey: String!,
     userId: String!,
     plainText: String!,
-    actions: [Action!],
-    blocks: [Block!],
+    actions: [Block!],
     buttons: [Button!],
     files: [File!],
     submit: Submit
