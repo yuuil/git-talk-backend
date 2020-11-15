@@ -12,7 +12,7 @@ import {
 export class Button extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  readonly id: string;
 
   @Field()
   @Column("text")

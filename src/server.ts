@@ -15,6 +15,7 @@ async function init() {
   const connection: Connection = await createConnection();
   const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
     resolvers: [path.join(__dirname, "/api/**/*.ts")],
+    validate: false,
   });
   const schema: any = makeExecutableSchema({ typeDefs, resolvers });
 

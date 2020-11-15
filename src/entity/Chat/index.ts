@@ -7,7 +7,6 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -28,10 +27,12 @@ export class Chat extends BaseEntity {
     return chat.state + "_" + chat.id.replace(/-/g, "");
   }
 
-  @Field(() => Message)
-  @OneToOne(() => Message, (message) => message.id, { lazy: true })
+  @Field(() => Message, { nullable: true })
   async lastMessage(@Root() chat: Chat): Promise<Message> {
-    return await Message.findOne(chat, { order: { createdAt: "DESC" } });
+    return await Message.findOne(
+      { chatId: chat.id },
+      { order: { createdAt: "DESC" } }
+    );
   }
 
   @Field(() => User)
@@ -41,7 +42,7 @@ export class Chat extends BaseEntity {
   }
 
   @Field()
-  @UpdateDateColumn({type: "timestamp with time zone"})
+  @UpdateDateColumn({ type: "timestamp with time zone" })
   askedAt?: Date;
 
   @Field()

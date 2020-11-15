@@ -1,5 +1,6 @@
 type Mutation {
   createButton(
+    key, String!,
     text: String!,
     theme: String,
     url: String

@@ -1,8 +1,7 @@
 type Mutation {
-  createMessage(
-    chatId: String!,
-    userId: String!,
-    plainText: String!,
+  updateMessage(
+    id: String!,
+    plainText: String,
     actions: [Block!],
     buttons: [Button!],
     files: [File!],

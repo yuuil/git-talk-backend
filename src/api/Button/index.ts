@@ -15,12 +15,14 @@ export class ButtonResolver {
 
   @Mutation(() => Boolean)
   async createButton(
+    @Arg("key") key: string,
     @Arg("text") text: string,
     @Arg("theme", { nullable: true }) theme?: string,
     @Arg("url", { nullable: true }) url?: string
   ): Promise<boolean> {
     try {
       await Button.insert({
+        key,
         text,
         theme,
         url,

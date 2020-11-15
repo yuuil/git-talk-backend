@@ -22,7 +22,6 @@ type Chat {
 type Message {
   id: ID!
   chatId: String!
-  chatKey: String!
   userId: String!
   plainText: String!
   actions: [Button!]

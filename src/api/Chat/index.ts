@@ -41,6 +41,7 @@ export class ChatResolver {
           state: "close",
         }
       );
+      return true;
     } catch (err) {
       console.warn(err);
       return false;
@@ -50,7 +51,18 @@ export class ChatResolver {
   @Mutation(() => Boolean)
   async deleteChat(@Arg("id") id: string): Promise<boolean> {
     try {
-      await Chat.delete({id});
+      await Chat.delete({ id });
+      return true;
+    } catch (err) {
+      console.warn(err);
+      return false;
+    }
+  }
+
+  @Mutation(() => Boolean)
+  async updateChat(@Arg("id") id: string, @Arg("lastMessage") lastMessage: string): Promise<boolean> {
+    try {
+      await Chat.update({id}, {lastMessage});
       return true;
     } catch (err) {
       console.warn(err);

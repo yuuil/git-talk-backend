@@ -1,2 +1,3 @@
-import { CreateMessageArgs } from './createMessageArgs';
-export {CreateMessageArgs};
+import { CreateMessageArgs } from "./createMessageArgs";
+import { UpdateMessageArgs } from "./updateMessageArgs";
+export { CreateMessageArgs, UpdateMessageArgs };

@@ -1,7 +1,7 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import CryptoJS from "crypto-js";
 import { User } from "@entity/User";
-import { generateToken } from '@src/utils';
+import { generateToken } from '../../utils';
 
 @Resolver()
 export class UserResolver {

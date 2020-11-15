@@ -10,7 +10,6 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"],
       "@api/*": ["src/api/*"],
       "@args/*": ["src/args/*"],
       "@common/*": ["src/common/*"],

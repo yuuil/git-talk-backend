@@ -2,15 +2,14 @@ import { Block } from "@entity/Block";
 import { Button } from '@entity/Button';
 import { File } from "@entity/File";
 import { Submit } from '@entity/Submit';
+import { Message } from "@entity/Message";
 import { ArgsType, Field } from "type-graphql";
+import { BaseInputType } from '../index';
 
 @ArgsType()
-export class CreateMessageArgs {
+export class CreateMessageArgs implements Partial<Message> {
   @Field()
   chatId: string;
-
-  @Field()
-  chatKey: string;
 
   @Field()
   userId: string;
@@ -18,15 +17,15 @@ export class CreateMessageArgs {
   @Field()
   plainText: string;
 
-  @Field(() => [Button], {nullable: true})
+  @Field(() => [BaseInputType], {nullable: true})
   actions?: Button[];
 
-  @Field(() => [Block], {nullable: true})
+  @Field(() => [BaseInputType], {nullable: true})
   blocks?: Block[];
 
-  @Field(() => [File], {nullable: true})
+  @Field(() => [BaseInputType], {nullable: true})
   files?: File[];
 
-  @Field(() => Submit, {nullable: true})
+  @Field(() => String, {nullable: true})
   submit?: Submit;
 }
