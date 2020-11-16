@@ -1,11 +1,11 @@
 import "reflect-metadata";
 import "./env";
+import "./passport";
 import path from "path";
 import { GraphQLServer } from "graphql-yoga";
 import { makeExecutableSchema } from "graphql-tools";
 import { buildTypeDefsAndResolvers } from "type-graphql";
 import { Connection, createConnection } from "typeorm";
-import "./passport";
 import { authenticateJwt } from "./passport";
 import { isAuthenticated } from "./middleware";
 
@@ -15,7 +15,6 @@ async function init() {
   const connection: Connection = await createConnection();
   const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
     resolvers: [path.join(__dirname, "/api/**/*.ts")],
-    validate: false,
   });
   const schema: any = makeExecutableSchema({ typeDefs, resolvers });
 

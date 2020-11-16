@@ -55,9 +55,9 @@ export class MessageResolver {
     }: CreateMessageArgs
   ): Promise<boolean> {
     try {
-      const actionList = actions ? await Button.find({ where: actions}) : null;
-      const blockList = blocks ? await Block.find({ where: blocks}) : null;
-      const fileList = files ? await File.find({ where: files}) : null;
+      const actionList: Button[] | null = actions ? await Button.find({ where: actions}) : null;
+      const blockList: Block[] | null = blocks ? await Block.find({ where: blocks}) : null;
+      const fileList: File[] | null = files ? await File.find({ where: files}) : null;
       await Message.create({
         chatId,
         userId,
@@ -79,9 +79,9 @@ export class MessageResolver {
     @Args() { id, plainText, actions, blocks, files, submit }: UpdateMessageArgs
   ): Promise<boolean> {
     try {
-      const actionList = actions ? await Button.find({ where: actions}) : [];
-      const blockList = blocks ? await Block.find({ where: blocks}) : [];
-      const fileList = files ? await File.find({ where: files}) : [];
+      const actionList: Button[] | [] = actions ? await Button.find({ where: actions}) : [];
+      const blockList: Block[] | [] = blocks ? await Block.find({ where: blocks}) : [];
+      const fileList: File[] | [] = files ? await File.find({ where: files}) : [];
       const message = await Message.findOne(
         { id },
         { relations: ["actions", "blocks", "files", "submit"] }

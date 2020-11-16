@@ -1,7 +1,8 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import CryptoJS from "crypto-js";
 import { User } from "@entity/User";
-import { generateToken } from '../../utils';
+import { Context } from "graphql-yoga/dist/types";
+import { generateToken } from "../../utils";
 
 @Resolver()
 export class UserResolver {
@@ -28,7 +29,10 @@ export class UserResolver {
     @Arg("avatarUrl", { nullable: true }) avatarUrl?: string
   ): Promise<boolean> {
     try {
-      const hashed: string = CryptoJS.HmacSHA512(password, process.env.PW_SECRET_KEY).toString(CryptoJS.enc.Base64);
+      const hashed: string = CryptoJS.HmacSHA512(
+        password,
+        process.env.PW_SECRET_KEY
+      ).toString(CryptoJS.enc.Base64);
       await User.insert({
         userId,
         password: hashed,
@@ -54,14 +58,18 @@ export class UserResolver {
   }
 
   @Mutation(() => String)
-  async logIn(@Arg("userId") userId: string, @Arg("password") password: string): Promise<string> {
+  async logIn(
+    @Arg("userId") userId: string,
+    @Arg("password") password: string,
+    @Ctx() ctx: Context
+  ): Promise<string> {
     try {
-      const user = await User.findOne({userId});
-      if(user) {
-        const hashed = CryptoJS.HmacSHA512(password, process.env.PW_SECRET_KEY).toString(CryptoJS.enc.Base64);
-        if(hashed === user.password) return generateToken(user.id);
-        else throw Error("잘못된 아이디/비밀번호입니다.");
-      } else throw Error("존재하지 않는 사용자입니다.");
+      const { user } = await ctx.authenticate("graphql-local", {
+        username: userId,
+        password,
+      });
+      ctx.login(user);
+      return generateToken(user.id);
     } catch (err) {
       console.warn(err);
       throw Error("에러가 발생했습니다. 잠시 후 다시 시도해주세요.");
