@@ -1,7 +1,8 @@
 import { User } from "@entity/User";
 import passport from "passport";
+import CryptoJS from 'crypto-js';
 import { ExtractJwt, Strategy, StrategyOptions } from "passport-jwt";
-import { generateToken } from './utils';
+import { GraphQLLocalStrategy } from 'graphql-passport';
 
 const jwtOptions: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -36,6 +37,10 @@ export const authenticateJwt = (req, res, next) =>
     next();
   })(req, res, next);
 
-
 passport.use(new Strategy(jwtOptions, verifyUser));
-passport.initialize();
+passport.use(new GraphQLLocalStrategy(verifyLocal));
+
+passport.serializeUser((user: User, done) => done(null, user.id));
+passport.deserializeUser(async (id, done) => {
+  return await User.findOne(id).then((user) => done(null, user)).catch((err) => done(err, false));
+});

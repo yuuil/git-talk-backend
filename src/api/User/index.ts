@@ -58,21 +58,52 @@ export class UserResolver {
   }
 
   @Mutation(() => String)
+  async createAnonymousUser(): Promise<string> {
+    try {
+      const user = await User.create({
+        userId: "anonymous",
+        password: CryptoJS.HmacSHA512(
+          Date.now().toString(),
+          process.env.PW_SECRET_KEY
+        ).toString(CryptoJS.enc.Base64),
+        name: "익명의 깃린이",
+      }).save();
+      return generateToken(user.id);
+    } catch (err) {
+      console.warn(err);
+      return "";
+    }
+  }
+
+  @Mutation(() => String)
   async logIn(
     @Arg("userId") userId: string,
     @Arg("password") password: string,
     @Ctx() ctx: Context
   ): Promise<string> {
     try {
-      const { user } = await ctx.authenticate("graphql-local", {
+      const { user, info } = await ctx.authenticate("graphql-local", {
         username: userId,
         password,
       });
+      if (user === false) return info.message;
       ctx.login(user);
       return generateToken(user.id);
     } catch (err) {
       console.warn(err);
       throw Error("에러가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    }
+  }
+
+  @Mutation(() => Boolean)
+  async logOut(@Ctx() ctx: Context): Promise<boolean> {
+    try {
+      ctx.logout();
+      ctx.req.session.destroy();
+      return true;
+    } catch (err) {
+      console.warn(err);
+      return false;
     }
   }
 }

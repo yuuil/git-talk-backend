@@ -1,12 +1,14 @@
 import { Block } from "@entity/Block";
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { Context } from "graphql-yoga/dist/types";
+import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { Like } from "typeorm";
 
 @Resolver()
 export class BlockResolver {
   @Query(() => Block, { nullable: true })
-  async block(@Arg("key") key: string): Promise<Block> {
+  async block(@Arg("key") key: string, @Ctx() {req}: Context): Promise<Block> {
     try {
+      console.log(req);
       return await Block.findOne({ key });
     } catch (err) {
       console.warn(err);
