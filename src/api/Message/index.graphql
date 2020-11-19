@@ -1,4 +1,4 @@
 type Query {
   message(id: String!): Message
-  messages(userId: String!, page: Int, per: Int): [Message]
+  messages(chatId: String!, page: Int, per: Int): [Message]
 }

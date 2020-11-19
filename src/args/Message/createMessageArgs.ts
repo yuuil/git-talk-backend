@@ -4,7 +4,7 @@ import { File } from "@entity/File";
 import { Submit } from '@entity/Submit';
 import { Message } from "@entity/Message";
 import { ArgsType, Field } from "type-graphql";
-import { BaseInputType } from '../index';
+import { BaseInputType } from '..';
 
 @ArgsType()
 export class CreateMessageArgs implements Partial<Message> {

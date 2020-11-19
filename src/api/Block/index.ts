@@ -8,7 +8,6 @@ export class BlockResolver {
   @Query(() => Block, { nullable: true })
   async block(@Arg("key") key: string, @Ctx() {req}: Context): Promise<Block> {
     try {
-      console.log(req);
       return await Block.findOne({ key });
     } catch (err) {
       console.warn(err);

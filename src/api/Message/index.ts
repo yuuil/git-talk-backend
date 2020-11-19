@@ -23,13 +23,13 @@ export class MessageResolver {
 
   @Query(() => [Message], { nullable: true })
   async messages(
-    @Arg("userId") userId: string,
+    @Arg("chatId") chatId: string,
     @Arg("page", { defaultValue: 0 }) page?: number,
     @Arg("per", { defaultValue: 20 }) per?: number
   ): Promise<Message[]> {
     try {
       return await Message.find({
-        where: { userId },
+        where: { chatId },
         relations: ["actions", "blocks", "files", "submit"],
         skip: page * per,
         take: per,

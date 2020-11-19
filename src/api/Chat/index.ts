@@ -1,5 +1,5 @@
 import { Chat } from "@entity/Chat";
-import { User } from "@entity/User/index";
+import { User } from "@entity/User";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 
 @Resolver()
@@ -52,17 +52,6 @@ export class ChatResolver {
   async deleteChat(@Arg("id") id: string): Promise<boolean> {
     try {
       await Chat.delete({ id });
-      return true;
-    } catch (err) {
-      console.warn(err);
-      return false;
-    }
-  }
-
-  @Mutation(() => Boolean)
-  async updateChat(@Arg("id") id: string, @Arg("lastMessage") lastMessage: string): Promise<boolean> {
-    try {
-      await Chat.update({id}, {lastMessage});
       return true;
     } catch (err) {
       console.warn(err);

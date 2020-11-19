@@ -1,5 +1,5 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import { Button } from "../../entity/Button/index";
+import { Button } from "@entity/Button";
 
 @Resolver()
 export class ButtonResolver {
